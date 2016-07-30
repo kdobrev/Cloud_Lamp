@@ -134,13 +134,13 @@ void flash1()
     for (int i = 0; i < times_local; i++)
     {
       Serial.print("1");
-      digitalWrite(5, lightON);
+      digitalWrite(D1, lightON);
       delay(20 + random(DURATION));
       if (times_local == 1) {
-        fadeout(5);
+        fadeout(D1);
       }
       else {
-        digitalWrite(5, lightOFF);
+        digitalWrite(D1, lightOFF);
         delay(20 + random(DURATION));
       }
     }
@@ -158,13 +158,13 @@ void flash2()
     for (int i = 0; i < times_local; i++)
     {
       Serial.print("2");
-      digitalWrite(2, lightON);
+      digitalWrite(D2, lightON);
       delay(20 + random(DURATION));
       if (times_local == 1) {
-        fadeout(2);
+        fadeout(D2);
       }
       else {
-        digitalWrite(2, lightOFF);
+        digitalWrite(D2, lightOFF);
         delay(20 + random(DURATION));
       }
     }
@@ -182,13 +182,13 @@ void flash3()
     for (int i = 0; i < times_local; i++)
     {
       Serial.print("3");
-      digitalWrite(4, lightON);
+      digitalWrite(D3, lightON);
       delay(20 + random(DURATION));
       if (times_local == 1) {
-        fadeout(4);
+        fadeout(D3);
       }
       else {
-        digitalWrite(4, lightOFF);
+        digitalWrite(D3, lightOFF);
         delay(20 + random(DURATION));
       }
     }
@@ -205,23 +205,23 @@ void flash4()
     for (int i = 0; i < times_local; i++)
     {
       Serial.print("4");
-      digitalWrite(0, lightON);
+      digitalWrite(D4, lightON);
       delay(20 + random(DURATION));
       if (times_local == 1) {
-        fadeout(0);
+        fadeout(D4);
       }
       else {
-        digitalWrite(0, lightOFF);
+        digitalWrite(D4, lightOFF);
         delay(20 + random(DURATION));
       }
     }
   }
 }
 void lightoff() {
-  digitalWrite(0, lightOFF);
-  digitalWrite(2, lightOFF);
-  digitalWrite(4, lightOFF);
-  digitalWrite(5, lightOFF);
+  digitalWrite(D1, lightOFF);
+  digitalWrite(D2, lightOFF);
+  digitalWrite(D3, lightOFF);
+  digitalWrite(D4, lightOFF);
   String page = FPSTR(HTTP_HEAD);
   page.replace("{v}", "Cloud lamp");
   page += FPSTR(HTTP_STYLE);
@@ -281,10 +281,10 @@ void sleep() {
     sleepTimeEnd = millis() + sleepTimeInterval;
   }
 
-  digitalWrite(0, lightON);
-  digitalWrite(2, lightOFF);
-  digitalWrite(4, lightOFF);
-  digitalWrite(5, lightOFF);
+  digitalWrite(D1, lightON);
+  digitalWrite(D2, lightOFF);
+  digitalWrite(D3, lightOFF);
+  digitalWrite(D4, lightOFF);
 
   String page = FPSTR(HTTP_HEAD);
   page.replace("{v}", "Cloud lamp");
@@ -353,10 +353,10 @@ void setup()
   pinMode(2, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-  digitalWrite(0, lightON);
-  digitalWrite(2, lightON);
-  digitalWrite(4, lightON);
-  digitalWrite(5, lightON);
+  digitalWrite(D1, lightON);
+  digitalWrite(D2, lightON);
+  digitalWrite(D3, lightON);
+  digitalWrite(D4, lightON);
 
 #ifdef LCD_DISP
   // LCD
@@ -452,8 +452,7 @@ void loop()
 
   switch (mode) {
     case 0:             //0 - off
-      //    lightoff();
-      //      clear_storm_wait();
+    
       break;
     case 1:             //1 - storm
       flash1();
@@ -462,10 +461,10 @@ void loop()
       flash4();
       break;
     case 2:             //2 - on
-      digitalWrite(0, lightON);
-      digitalWrite(2, lightON);
-      digitalWrite(4, lightON);
-      digitalWrite(5, lightON);
+      digitalWrite(D1, lightON);
+      digitalWrite(D2, lightON);
+      digitalWrite(D3, lightON);
+      digitalWrite(D4, lightON);
       //      clear_storm_wait();
       break;
     case 3:             //3 - sleep
